@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Save, Power, UserX, Tag, EyeOff, DollarSign, MessageSquare, Bell, Coins, Image, Link, Upload } from 'lucide-react';
+import { Save, Power, UserX, Tag, EyeOff, DollarSign, MessageSquare, Bell, Coins, Image, Link, Upload, Type } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 
 export function SystemConfig() {
@@ -21,6 +21,8 @@ export function SystemConfig() {
   const [bannerImage, setBannerImage] = useState<string | null>(null);
   const [logoImage, setLogoImage] = useState<string | null>(null);
   const [frontendLink, setFrontendLink] = useState('https://www.example.com');
+  const [websiteTitle, setWebsiteTitle] = useState('我的应用平台');
+  const [websiteDescription, setWebsiteDescription] = useState('专业的在线服务平台');
 
   const handleToggle = (key: keyof typeof toggles) => {
     setToggles(prev => ({ ...prev, [key]: !prev[key] }));
@@ -37,10 +39,10 @@ export function SystemConfig() {
     setTimeout(() => {
       toast.success('配置已成功保存！', {
         id: 'save-config',
-        description: '所有设���已应用到系统',
+        description: '所有设置已应用到系统',
         duration: 3000,
       });
-      console.log('保存配置:', { toggles, params, bannerImage, logoImage, frontendLink });
+      console.log('保存配置:', { toggles, params, bannerImage, logoImage, frontendLink, websiteTitle, websiteDescription });
     }, 1000);
   };
 
@@ -432,6 +434,42 @@ export function SystemConfig() {
                 </a>
               )}
             </div>
+          </div>
+
+          {/* 网站标题 */}
+          <div className="col-span-2">
+            <label className="block text-gray-700 mb-2">
+              网站标题
+            </label>
+            <div className="relative">
+              <Type className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                value={websiteTitle}
+                onChange={(e) => setWebsiteTitle(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                placeholder="我的应用平台"
+              />
+            </div>
+            <p className="text-gray-500 text-sm mt-1">前端应用的网站标题</p>
+          </div>
+
+          {/* 网站描述 */}
+          <div className="col-span-2">
+            <label className="block text-gray-700 mb-2">
+              网站描述
+            </label>
+            <div className="relative">
+              <Type className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                value={websiteDescription}
+                onChange={(e) => setWebsiteDescription(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                placeholder="专业的在线服务平台"
+              />
+            </div>
+            <p className="text-gray-500 text-sm mt-1">前端应用的网站描述</p>
           </div>
         </div>
       </div>
